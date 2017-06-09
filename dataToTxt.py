@@ -1,6 +1,6 @@
 import bpy
 
-obdata = bpy.context.object.data
+obdata = bpy.data.objects['Graphe_Art'].data
 
 print('Vertices:')
 for v in obdata.vertices:
@@ -11,5 +11,5 @@ for e in obdata.edges:
     print('{}. {} {}'.format(e.index, e.vertices[0], e.vertices[1]))
 
 /*
-	bpy.data.objects['Cube']
+	bpy.context.object.data
 */
