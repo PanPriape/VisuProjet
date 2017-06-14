@@ -130,7 +130,7 @@ class Projet(object):
 		if iter == 0:
 			print "Propagation jusqu'à la fin"
 		else:
-			print "Propagation sur "+str(iter)+" itération(s)"
+			print "Propagation sur "+str(iter)+" itérations"
 		print "Temps entre itération : "+str(time_sleep)+" seconde(s)"
 		print "Mode verbeux : "+str(debug)
 		print "\n"
@@ -190,7 +190,7 @@ class Projet(object):
 		
 		index = randint(0,len(list_node)-1)
 		
-		self.propagation(list_node[index],3,3,True)
+		self.propagation(list_node[index],0,3,True)
 		
 def main(graph):
 	pr = Projet(graph)
