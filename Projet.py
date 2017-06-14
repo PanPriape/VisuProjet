@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 from random import randint
+import time
 from tulip import *
 
 class Projet(object):
@@ -123,14 +124,23 @@ class Projet(object):
 		return [n for n in self.graph.getOutNodes(node)]
 		
 		
-	def propagation(self,node,iter,debug):
+	def propagation(self,node,iter,time_sleep,debug):
+		
+		print "Propagation à partir de : "+graph['Name'][node]
+		if iter == 0:
+			print "Propagation jusqu'à la fin"
+		else:
+			print "Propagation sur "+str(iter)+" itération(s)"
+		print "Temps entre itération : "+str(time_sleep)+" seconde(s)"
+		print "Mode verbeux : "+str(debug)
+		print "\n"
 		
 		list_node = []
 		list_attente = []
 		stop = True
 		count = 0
 		while stop:
-
+			updateVisualization()
 			# Initialise la liste de propagation
 			if len(list_node) == 0 and count == 0:
 				list_node = self.propagationStep(node)
@@ -162,17 +172,25 @@ class Projet(object):
 			count +=1
 			if iter != 0 and count > iter:
 				stop = False
+			
+			
+			# Pause pour visualiser la propagation
+			time.sleep(time_sleep)
 		
 	def run(self):
 		self.graph.clear();
 		self.generationModel()
+		updateVisualization()
+		
+		print "Modele : OK"
+		print "Début propagation"
+		print "\n"
 		
 		list_node = [node for node in self.graph.getNodes()]
 		
 		index = randint(0,len(list_node)-1)
-		print graph['Name'][list_node[index]]
 		
-		self.propagation(list_node[index],2,True)
+		self.propagation(list_node[index],3,3,True)
 		
 def main(graph):
 	pr = Projet(graph)
