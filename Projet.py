@@ -17,6 +17,7 @@ class Projet(object):
 		graph['viewColor'][node] = color
 		graph['viewLayout'][node] = position
 		graph['Name'][node] = name
+		graph['NBPass'][node] = 0
 		
 		return node
 
@@ -25,9 +26,11 @@ class Projet(object):
 		if(double):
 			edge = self.graph.addEdge(arrive,depart)
 			graph['viewColor'][edge] = color
+			graph['NBPass'][edge] = 0
 	
 		edge = self.graph.addEdge(depart,arrive)
 		graph['viewColor'][edge] = color
+		graph['NBPass'][edge] = 0
 		
 		return edge
 		
@@ -108,28 +111,45 @@ class Projet(object):
 
 		
 	def propagationStep(self,node):
-		graph['viewColor'][node] = self.red
+	
+		graph['viewColor'][node] = self.red		
+		graph['NBPass'][node] = graph['NBPass'][node] + 1
 		
 		for edge in self.graph.getOutEdges(node):
 			graph['viewColor'][edge] = self.red
+			graph['NBPass'][edge] = graph['NBPass'][edge] + 1
 		
 		updateVisualization()
 		return [n for n in self.graph.getOutNodes(node)]
 		
 		
-	def propagation(self,node,iter):
+	def propagation(self,node,iter,debug):
 		
-		list_list_node = []
+		list_node = []
+		list_attente = []
 		stop = True
 		count = 0
 		while stop:
-			if (len(list_list_node) == 0):
-				list_list_node.append(self.propagationStep(node))
-			else:
-				list_node = list_list_node[0]
-				del list_list_node[0]
-				for nodeStep in list_node:
-					list_list_node.append(self.propagationStep(nodeStep))
+
+			# Initialise la liste de propagation
+			if len(list_node) == 0 and count == 0:
+				list_node = self.propagationStep(node)
+			
+			for nodeStep in list_node:
+				tmp_list = self.propagationStep(nodeStep)
+				for tmp_node in tmp_list:
+					list_attente.append(tmp_node)
+			
+			
+			# Affiche les valeurs de debug
+			if debug:
+				print "Propagation tour : "+str(count)
+				print "La prochaine propagation se fait sur les noeuds :"
+				print list_attente
+				print "\n"
+			
+			list_node = list_attente
+			list_attente = []
 					
 			test = True
 			for edge in self.graph.getEdges():
@@ -152,7 +172,7 @@ class Projet(object):
 		index = randint(0,len(list_node)-1)
 		print graph['Name'][list_node[index]]
 		
-		self.propagation(list_node[index],3)
+		self.propagation(list_node[index],2,True)
 		
 def main(graph):
 	pr = Projet(graph)
