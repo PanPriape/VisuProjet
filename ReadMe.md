@@ -4,9 +4,12 @@ I. Description des fichiers
 
 La liste des fichiers présents dans le dépôt a été dans l'ensemble conçue et exploitée par l'équipe pilotant le projet.
 Dans cette liste sont disponibles les fichiers suivants :
-  - Projet.py : ce fichier est un script python permettant de lancer la simulation du mouvement du flux sanguin.
-  - dataToTxt.py : il s'agit d'un script qui n'est utilisé qu'un faible nombre de fois. Il permet de transformer les données de modèle étudié en données textuelles importables dans l'API Tulip. C'est ce script qui permet de créer le graphe de modélisation du système circulatoire.
+  - Projet.py : ce fichier est un script python permettant de lancer la simulation du mouvement du flux sanguin. (Version prototype)
+  - dataToTxt.py : il s'agit d'un script qui est utilisé lors du traitement des données. Il permet de transformer les données du modèle étudié en données textuelles importables dans l'API Tulip. C'est ce script qui permet de créer le graphe de modélisation du système circulatoire.
   - plusieurs versions PDF du rapport de projet : ceux-ci attestent du développement et du pilotage du projet. Une version condensée est écrite ci-dessous mais ne contient pas d'images. Il est recommandé de lire la dernière version pour comprendre tous nos choix et méthodes.
+  - dossier tulip qui contient le projet tulip nous permettant de visualiser la circulation du sang.
+  - dossier blend : il s'agit du dossier contenant les fichiers utilisés avec le logiciel Blender. Cela correspond à des objet 3D.
+  - dossier data : contient toutes les données et leurs évolutions. HF_Appareil_Cardio-vasculaire.obj est le modèle 3D récupéré sur le net.3DSanguin contient les données brut de blender, donnees.txt les données corrigées et enfin les fichiers noeuds.txt et arretes.txt sont les données que l'on peut importer directement dans tulip.
 
 
 
