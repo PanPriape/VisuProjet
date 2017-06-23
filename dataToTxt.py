@@ -10,7 +10,6 @@
 """
 ### Export des données dans le fichier texte 3DSanguin.txt.
 
-
 import bpy
 
 # obdata contient les données de notre object "Graphe_Art" représentant le flux sanguin
